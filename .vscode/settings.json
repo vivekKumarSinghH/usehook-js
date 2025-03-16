@@ -2,6 +2,7 @@
   "eslint.workingDirectories": [
     {
       "mode": "auto"
+      
     }
   ]
 }
