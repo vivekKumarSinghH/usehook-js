@@ -1,81 +1,181 @@
 #!/usr/bin/env node
-
 import { Command } from 'commander';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
 import fs from 'fs-extra';
 import path from 'path';
-import axios from 'axios';
-import ora from 'ora';
-import Conf from 'conf';
+import { fileURLToPath } from 'url';
 
-const config = new Conf({ projectName: 'react-hooks-cli' });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+interface Hook {
+  name: string;
+  description: string;
+}
+
+// Define available hooks
+const AVAILABLE_HOOKS: Hook[] = [
+  {
+    name: 'useFetch',
+    description: 'A hook for making HTTP requests with fetch API',
+  },
+  {
+    name: 'useLocalStorage',
+    description: 'A hook for storing and retrieving values from localStorage',
+  },
+  {
+    name: 'useDarkMode',
+    description: 'A hook for managing dark mode in your application',
+  },
+];
 
 const program = new Command();
 
 program
-    .name('react-hooks-cli')
-    .description('CLI to add React hooks to your project')
-    .version('0.1.0');
+  .name('add-hooks')
+  .description('CLI to add React hooks to your project')
+  .version('0.1.0');
+
+// Helper function to check if project uses TypeScript
+async function isTypeScriptProject(projectRoot: string): Promise<boolean> {
+  const possibleTSConfigs = [
+    'tsconfig.json',
+    'tsconfig.base.json',
+    'tsconfig.app.json'
+  ];
+
+  for (const config of possibleTSConfigs) {
+    if (await fs.pathExists(path.join(projectRoot, config))) {
+      return true;
+    }
+  }
+  return false;
+}
 
 program
-    .command('add <hook>')
-    .description('Add a hook to your project')
-    .action(async (hook: string) => {
-        const spinner = ora('Fetching hook information').start();
-
-        try {
-            const registryUrl = config.get('registryUrl') as string || 'https://your-registry-url.com/hooks.json';
-            const response = await axios.get(registryUrl);
-            const hooks = response.data;
-
-            spinner.succeed('Hook information fetched');
-
-            const selectedHook = hooks.find((h: any) => h.name === hook);
-
-            if (!selectedHook) {
-                console.error(chalk.red(`Hook ${hook} not found in the registry`));
-                return;
-            }
-
-            const { directory } = await inquirer.prompt([
-                {
-                    type: 'input',
-                    name: 'directory',
-                    message: 'Where would you like to add the hook? (e.g., src/hooks)',
-                    default: 'src/hooks'
-                }
-            ]);
-
-            spinner.start('Adding hook to your project');
-
-            await fs.ensureDir(directory);
-            const filePath = path.join(process.cwd(), directory, `${hook}.ts`);
-
-            const hookContent = await axios.get(selectedHook.url);
-            await fs.writeFile(filePath, hookContent.data);
-
-            spinner.succeed(chalk.green(`Added ${hook} to ${filePath}`));
-        } catch (error) {
-            spinner.fail(chalk.red(`Failed to add hook: ${error.message}`));
+  .command('add')
+  .description('add hooks to your project')
+  .option('-p, --path <path>', 'the path to add the hooks to', 'src/hooks')
+  .action(async (requestedHooks: string[], options: { path: string }) => {
+    try {
+      // If no hooks specified, prompt for selection
+      if (!requestedHooks?.length) {
+        const { selectedHooks } = await inquirer.prompt({
+          type: 'checkbox',
+          name: 'selectedHooks',
+          message: 'Which hooks would you like to add?',
+          choices: AVAILABLE_HOOKS.map(hook => ({
+            name: `${hook.name} - ${hook.description}`,
+            value: hook.name,
+            short: hook.name,
+          })),
+        });
+        
+        if (!selectedHooks?.length) {
+          console.log(chalk.yellow('No hooks selected. Exiting.'));
+          process.exit(0);
         }
-    });
+        
+        requestedHooks = selectedHooks;
+      }
+
+      // Validate hooks
+      for (const hookName of requestedHooks) {
+        if (!AVAILABLE_HOOKS.find(h => h.name === hookName)) {
+          console.log(chalk.red(`Hook "${hookName}" not found.`));
+          console.log(chalk.yellow('Available hooks:'));
+          AVAILABLE_HOOKS.forEach(h => console.log(chalk.blue(`  - ${h.name}: ${h.description}`)));
+          process.exit(1);
+        }
+      }
+
+      const projectRoot = process.cwd();
+      // Auto-detect TypeScript
+      const isTypeScript = await isTypeScriptProject(projectRoot);
+      const fileExtension = isTypeScript ? '.ts' : '.js';
+      
+      // Create target directory if it doesn't exist
+      const targetDirectory = path.resolve(projectRoot, options.path);
+      await fs.ensureDir(targetDirectory);
+
+      const addedHooks: string[] = [];
+      const existingHooks: string[] = [];
+
+      // First check for existing files
+      for (const hookName of requestedHooks) {
+        const targetPath = path.join(targetDirectory, `${hookName}${fileExtension}`);
+        if (await fs.pathExists(targetPath)) {
+          existingHooks.push(hookName);
+        }
+      }
+
+      // If there are existing files, prompt for overwrite
+      let shouldOverwrite = false;
+      if (existingHooks.length > 0) {
+        const { overwrite } = await inquirer.prompt({
+          type: 'confirm',
+          name: 'overwrite',
+          message: `The following hooks already exist:\n${existingHooks.map(h => `  - ${h}`).join('\n')}\nDo you want to overwrite them?`,
+          default: false,
+        });
+        shouldOverwrite = overwrite;
+      }
+
+      // Copy hooks to target
+      for (const hookName of requestedHooks) {
+        const hookTemplatePath = path.join(__dirname, '..', 'templates', `${hookName}${fileExtension}.template`);
+        const hookTargetPath = path.join(targetDirectory, `${hookName}${fileExtension}`);
+        
+        // Check if template exists
+        if (!await fs.pathExists(hookTemplatePath)) {
+          console.log(chalk.yellow(`⚠ Template for ${hookName} not found, skipping...`));
+          continue;
+        }
+
+        // Skip if file exists and no overwrite
+        if (await fs.pathExists(hookTargetPath) && !shouldOverwrite) {
+          continue;
+        }
+
+        // Copy template to target
+        await fs.copyFile(hookTemplatePath, hookTargetPath);
+        addedHooks.push(hookTargetPath);
+      }
+      
+      // Show results
+      if (addedHooks.length) {
+        console.log(chalk.green(`\n✓ Added ${addedHooks.length} hook${addedHooks.length === 1 ? '' : 's'}:`));
+        addedHooks.forEach(hookPath => console.log(`  - ${path.relative(projectRoot, hookPath)}`));
+      }
+      
+      const skippedCount = existingHooks.length - (shouldOverwrite ? addedHooks.length : 0);
+      if (skippedCount > 0) {
+        console.log(chalk.yellow(`\n⚠ Skipped ${skippedCount} existing hook${skippedCount === 1 ? '' : 's'}`));
+      }
+
+      // Show usage example for successfully added hooks
+      if (addedHooks.length) {
+        console.log(chalk.blue('\nUsage example:'));
+        const hookNames = addedHooks.map(file => path.basename(file, fileExtension));
+        hookNames.forEach(hookName => {
+          console.log(`import { ${hookName} } from '${options.path}/${hookName}';\n`);
+        });
+      }
+    } catch (error) {
+      console.error(chalk.red('Error:'), error instanceof Error ? error.message : 'Unknown error');
+      process.exit(1);
+    }
+  });
 
 program
-    .command('init')
-    .description('Initialize the CLI configuration')
-    .action(async () => {
-        const { registryUrl } = await inquirer.prompt([
-            {
-                type: 'input',
-                name: 'registryUrl',
-                message: 'Enter the URL of your hooks registry:',
-                default: 'https://your-registry-url.com/hooks.json'
-            }
-        ]);
-
-        config.set('registryUrl', registryUrl);
-        console.log(chalk.green('Configuration saved successfully'));
+  .command('list')
+  .description('list all available hooks')
+  .action(() => {
+    console.log(chalk.bold('Available hooks:'));
+    AVAILABLE_HOOKS.forEach(hook => {
+      console.log(chalk.green(`- ${hook.name}: `) + chalk.white(hook.description));
     });
+  });
 
 program.parse();
