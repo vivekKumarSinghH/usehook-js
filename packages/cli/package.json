@@ -10,7 +10,9 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts",
     "dev": "tsup src/index.ts --format cjs,esm --watch --dts",
-    "lint": "eslint src/**/*.ts"
+    "lint": "eslint src/**/*.ts",
+    "generate-templates": "ts-node scripts/generate-templates.ts",
+    "prebuild": "npm run generate-templates"
   },
   "dependencies": {
     "commander": "^11.0.0",
