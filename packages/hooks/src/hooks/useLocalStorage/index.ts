@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 /**
  * A hook for storing and retrieving values from localStorage
@@ -21,7 +21,7 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
     if (typeof window === 'undefined') {
       return initialValue;
     }
-    
+
     try {
       // Get from local storage by key
       const item = window.localStorage.getItem(key);
