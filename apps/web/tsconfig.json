@@ -1,12 +1,18 @@
 {
   "extends": "@repo/typescript-config/nextjs.json",
   "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"],
+      // "@workspace/hooks": ["../../packages/hooks/src"]
+    },
     "plugins": [
       {
         "name": "next"
       }
     ]
+    
   },
+
   "include": [
     "**/*.ts",
     "**/*.tsx",
