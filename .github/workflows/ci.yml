@@ -31,6 +31,7 @@ jobs:
           node-version: "lts/*"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter usehook-js build
       - run: pnpm typecheck
 
   test:
