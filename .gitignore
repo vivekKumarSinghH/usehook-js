@@ -6,17 +6,17 @@ SPEC/agents/
 SPEC/rulebooks/
 SPEC/templates/
 SPEC/workflows/
-SPEC/references/
-
 .claude/agents/
 .claude/skills/
 .claude/claude.md
 # === end AIRE SDLC Agentic Framework ===
-docs/plans
-docs/architecture
-docs/architecture-diagrams
-docs/stories-implemented
 
+# docs/plans
+# docs/architecture
+# docs/architecture-diagrams
+# docs/stories-implemented
+
+.mcp.json
 node_modules/
 dist/
 .next/
