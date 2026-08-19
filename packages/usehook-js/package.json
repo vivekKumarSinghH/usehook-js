@@ -1,0 +1,53 @@
+{
+  "name": "usehook-js",
+  "version": "0.0.0",
+  "description": "A small, dependency-free React hooks library — install as a package or copy via CLI, same source either way.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./registry": {
+      "types": "./dist/registry/index.d.ts",
+      "default": "./dist/registry/index.js"
+    }
+  },
+  "files": ["dist", "src/hooks"],
+  "bin": {
+    "usehook-js": "./dist/cli/bin.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --max-warnings=0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.0.0",
+    "vitest": "^2.0.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "jsdom": "^25.0.0",
+    "@testing-library/react": "^16.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "@types/react": "^18.0.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0"
+  }
+}
