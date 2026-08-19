@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import { NavLink } from '../components/ui/NavLink'
 
 export const metadata = {
   title: 'usehook-js',
@@ -9,7 +10,15 @@ export const metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <header>
+          <nav>
+            <NavLink href="/">Home</NavLink>
+            <NavLink href="/hooks">Hooks</NavLink>
+          </nav>
+        </header>
+        {children}
+      </body>
     </html>
   )
 }
