@@ -46,6 +46,9 @@ jobs:
           node-version: "lts/*"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
+      # apps/docs' test suite imports 'usehook-js/registry' — same
+      # fresh-checkout gap as the typecheck job (see its comment above).
+      - run: pnpm --filter usehook-js build
       - run: pnpm test
 
   build:
@@ -61,3 +64,19 @@ jobs:
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+
+  dependency-gates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter usehook-js build
+      - run: pnpm check:zero-deps
+      - run: pnpm size
