@@ -8,7 +8,12 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 describe('hooks registry', () => {
   it('contains a registered entry for every currently-implemented hook', () => {
-    expect(hooks.map((h) => h.id)).toEqual(['useLocalStorage'])
+    expect(hooks.map((h) => h.id)).toEqual([
+      'useLocalStorage',
+      'useFetch',
+      'useDebounce',
+      'useToggle',
+    ])
   })
 
   it('has no duplicate ids', () => {

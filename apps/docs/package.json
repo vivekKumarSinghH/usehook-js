@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "test": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint app lib --max-warnings=0"
+    "lint": "eslint app lib components --max-warnings=0"
   },
   "dependencies": {
     "next": "^14.2.0",
@@ -17,6 +18,8 @@
   "devDependencies": {
     "typescript": "^5.5.0",
     "@types/react": "^18.3.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.0.0",
+    "vitest": "^2.0.0",
+    "@vitest/coverage-v8": "^2.0.0"
   }
 }

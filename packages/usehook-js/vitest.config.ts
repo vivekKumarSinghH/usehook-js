@@ -13,17 +13,15 @@ export default defineConfig({
       // v8 can never credit it. registry/index.ts is a pure re-export barrel
       // (`export * from './types'; export * from './hooks'`) with nothing to
       // branch on — only consumed by apps/docs, never imported by this
-      // package's own tests. index.ts is excluded until it gains its first
-      // real hook export (deferred to Story 2.2/2.3's consumption stage —
-      // patterns doc: type-only/no-logic files are skipped, index.ts is
-      // currently in that same category). cli/bin.ts is a thin
-      // commander-wiring entry point with no branching logic of its own —
-      // proven by the manual CLI run in Story 1.2, not a unit test.
+      // package's own tests. index.ts is no longer excluded: Story 2.4 gave
+      // it a real export (useLocalStorage) and index.test.ts covers it.
+      // cli/bin.ts is a thin commander-wiring entry point with no branching
+      // logic of its own — proven by the manual CLI run in Story 1.2, not a
+      // unit test.
       exclude: [
         'src/**/*.test.{ts,tsx}',
         'src/registry/types.ts',
         'src/registry/index.ts',
-        'src/index.ts',
         'src/cli/bin.ts',
       ],
       thresholds: {
