@@ -10,6 +10,7 @@ export function SearchInput({
   return (
     <input
       type="search"
+      className="search-input"
       value={value}
       placeholder={placeholder}
       onChange={(e) => onChange(e.target.value)}

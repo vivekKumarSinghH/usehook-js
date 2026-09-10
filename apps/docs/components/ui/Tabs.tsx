@@ -13,6 +13,7 @@ export function Tabs({ tabs }: { tabs: { label: string; content: ReactNode }[] }
             key={tab.label}
             type="button"
             role="tab"
+            className="tab-btn"
             aria-selected={i === active}
             onClick={() => setActive(i)}
           >

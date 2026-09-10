@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { generateCatalog, getHookById } from '../../../lib/generateCatalog'
 import { getHookSource } from '../../../lib/getHookSource'
+import { categoryStyle } from '../../../lib/categoryTheme'
 import { Badge } from '../../../components/ui/Badge'
 import { CodeBlock } from '../../../components/ui/CodeBlock'
 import { Tabs } from '../../../components/ui/Tabs'
@@ -17,9 +18,9 @@ export default function HookDetailPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <main>
+    <article style={categoryStyle(hook.category)}>
+      <Badge category={hook.category} />
       <h1>{hook.name}</h1>
-      <Badge>{hook.category}</Badge>
       <p>{hook.description}</p>
 
       <Tabs
@@ -52,26 +53,28 @@ export default function HookDetailPage({ params }: { params: { id: string } }) {
       <CodeBlock code={getHookSource(hook)} language="ts" />
 
       <h2>Parameters</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Required</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {hook.params.map((param) => (
-            <tr key={param.name}>
-              <td>{param.name}</td>
-              <td>{param.type}</td>
-              <td>{param.required ? 'Yes' : 'No'}</td>
-              <td>{param.description}</td>
+      <div className="table-scroll">
+        <table className="params-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Description</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {hook.params.map((param) => (
+              <tr key={param.name}>
+                <td>{param.name}</td>
+                <td>{param.type}</td>
+                <td>{param.required ? 'Yes' : 'No'}</td>
+                <td>{param.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <h2>Returns</h2>
       <code>{hook.returns}</code>
@@ -87,6 +90,6 @@ export default function HookDetailPage({ params }: { params: { id: string } }) {
           </div>
         ))
       )}
-    </main>
+    </article>
   )
 }
