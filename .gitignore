@@ -26,4 +26,5 @@ coverage/
 .env
 next-env.d.ts
 *.tsbuildinfo
+.github/skills/impeccable
 

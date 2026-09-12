@@ -15,6 +15,6 @@ export function printHookList(hookList: HookMetadata[] = hooks): void {
 export function registerListCommand(program: Command): void {
   program
     .command('list')
-    .description('List every hook available in usehook-js')
+    .description('List every hook available in usehookify')
     .action(() => printHookList())
 }

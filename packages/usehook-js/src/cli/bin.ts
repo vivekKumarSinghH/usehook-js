@@ -5,9 +5,9 @@ import { registerAddCommand } from './commands/add'
 const program = new Command()
 
 program
-  .name('usehook-js')
-  .description('usehook-js CLI — list and copy React hooks')
-  .version('0.0.0')
+  .name('usehookify')
+  .description('usehookify CLI — list and copy React hooks')
+  .version('1.0.0')
 
 registerListCommand(program)
 registerAddCommand(program)

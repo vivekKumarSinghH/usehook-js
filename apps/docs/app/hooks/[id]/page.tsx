@@ -29,8 +29,8 @@ export default function HookDetailPage({ params }: { params: { id: string } }) {
             label: 'npm install',
             content: (
               <>
-                <CodeBlock code="npm install usehook-js" language="bash" />
-                <CodeBlock code={`import { ${hook.name} } from 'usehook-js'`} language="ts" />
+                <CodeBlock code="npm install usehookify" language="bash" />
+                <CodeBlock code={`import { ${hook.name} } from 'usehookify'`} language="ts" />
               </>
             ),
           },
@@ -38,7 +38,7 @@ export default function HookDetailPage({ params }: { params: { id: string } }) {
             label: 'CLI copy-paste',
             content: (
               <>
-                <CodeBlock code={`npx usehook-js add ${hook.id}`} language="bash" />
+                <CodeBlock code={`npx usehookify add ${hook.id}`} language="bash" />
                 <CodeBlock
                   code={`import { ${hook.name} } from './hooks/${hook.id}'`}
                   language="ts"

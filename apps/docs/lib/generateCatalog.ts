@@ -1,5 +1,5 @@
-import { hooks } from 'usehook-js/registry'
-import type { HookMetadata } from 'usehook-js/registry'
+import { hooks } from 'usehookify/registry'
+import type { HookMetadata } from 'usehookify/registry'
 
 export function generateCatalog(): HookMetadata[] {
   return hooks

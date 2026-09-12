@@ -1,7 +1,15 @@
 {
-  "name": "usehook-js",
-  "version": "0.0.0",
+  "name": "usehookify",
+  "version": "1.0.0",
   "description": "A small, dependency-free React hooks library — install as a package or copy via CLI, same source either way.",
+  "license": "MIT",
+  "author": "Vivek Kumar",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vivekKumarSinghH/usehook-js.git",
+    "directory": "packages/usehook-js"
+  },
+  "keywords": ["react", "hooks", "react-hooks", "typescript", "cli"],
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -24,7 +32,7 @@
   },
   "files": ["dist", "src/hooks"],
   "bin": {
-    "usehook-js": "./dist/cli/bin.js"
+    "usehookify": "./dist/cli/bin.js"
   },
   "scripts": {
     "build": "tsup",

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import type { HookMetadata } from 'usehook-js/registry'
+import type { HookMetadata } from 'usehookify/registry'
 import { categoryStyle } from '../../lib/categoryTheme'
 import { Badge } from '../ui/Badge'
 
