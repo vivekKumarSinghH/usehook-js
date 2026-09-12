@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import type { HookMetadata } from 'usehook-js/registry'
+import type { HookMetadata } from 'usehookify/registry'
 import { categoryStyle } from '../../lib/categoryTheme'
 
 interface Option {

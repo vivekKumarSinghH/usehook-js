@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { generateCatalog, getHookById } from './generateCatalog'
-import { hooks } from 'usehook-js/registry'
+import { hooks } from 'usehookify/registry'
 
 describe('generateCatalog', () => {
   it('returns the real registry array', () => {

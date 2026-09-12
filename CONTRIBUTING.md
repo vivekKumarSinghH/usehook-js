@@ -1,4 +1,4 @@
-# Contributing to usehook-js
+# Contributing to usehookify
 
 Thanks for your interest in contributing! This guide covers everything you
 need to get set up, run the same checks CI runs, and submit a change.
@@ -6,7 +6,7 @@ need to get set up, run the same checks CI runs, and submit a change.
 ## Getting Started
 
 This is a pnpm workspace monorepo (`packages/usehook-js` is the published
-library, `apps/docs` is the documentation site). It requires the pnpm
+`usehookify` library, `apps/docs` is the documentation site). It requires the pnpm
 version pinned in the root `package.json`'s `packageManager` field.
 
 ```bash
@@ -29,8 +29,8 @@ pnpm build      # tsup (library + CLI) and next build (docs)
 
 All four must pass before a PR can merge. `pnpm typecheck` and `pnpm test`
 both require `packages/usehook-js` to be built first if you're running them
-in isolation (`pnpm --filter usehook-js build`) — `apps/docs` resolves
-`usehook-js`'s types and registry through its built `dist/` output, not its
+in isolation (`pnpm --filter usehookify build`) — `apps/docs` resolves
+`usehookify`'s types and registry through its built `dist/` output, not its
 source directly.
 
 To run the docs site locally: `pnpm --filter docs dev`.
@@ -74,7 +74,7 @@ manage versioning and changelogs. If your change touches
 pnpm changeset
 ```
 
-and follow the prompts (pick `usehook-js`, choose a semver bump type, write
+and follow the prompts (pick `usehookify`, choose a semver bump type, write
 a one-line summary). Commit the generated `.changeset/*.md` file alongside
 your change. Changes to `apps/docs` alone don't need a changeset — the docs
 site isn't published as a package.

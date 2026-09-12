@@ -1,6 +1,6 @@
-# usehook-js
+# usehookify
 
-[![npm version](https://img.shields.io/npm/v/usehook-js.svg)](https://www.npmjs.com/package/usehook-js)
+[![npm version](https://img.shields.io/npm/v/usehookify.svg)](https://www.npmjs.com/package/usehookify)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/vivekKumarSinghH/usehook-js/blob/main/LICENSE)
 
 A small, dependency-free React hooks library you can install as an npm
@@ -19,17 +19,17 @@ source either way.
 ## Install
 
 ```bash
-npm install usehook-js
+npm install usehookify
 ```
 
 ```ts
-import { useLocalStorage } from 'usehook-js'
+import { useLocalStorage } from 'usehookify'
 ```
 
 ## Or copy it directly — same source, no dependency
 
 ```bash
-npx usehook-js add useDebounce
+npx usehookify add useDebounce
 ```
 
 ```ts
@@ -41,7 +41,7 @@ Both paths ship the exact same, byte-identical source.
 ## CLI
 
 ```bash
-npx usehook-js list
+npx usehookify list
 ```
 
 ## Documentation

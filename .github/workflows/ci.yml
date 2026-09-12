@@ -31,7 +31,7 @@ jobs:
           node-version: "lts/*"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter usehook-js build
+      - run: pnpm --filter usehookify build
       - run: pnpm typecheck
 
   test:
@@ -46,9 +46,9 @@ jobs:
           node-version: "lts/*"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      # apps/docs' test suite imports 'usehook-js/registry' — same
+      # apps/docs' test suite imports 'usehookify/registry' — same
       # fresh-checkout gap as the typecheck job (see its comment above).
-      - run: pnpm --filter usehook-js build
+      - run: pnpm --filter usehookify build
       - run: pnpm test
 
   build:
@@ -77,6 +77,6 @@ jobs:
           node-version: "lts/*"
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter usehook-js build
+      - run: pnpm --filter usehookify build
       - run: pnpm check:zero-deps
       - run: pnpm size

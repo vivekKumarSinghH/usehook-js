@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import type { HookMetadata } from 'usehook-js/registry'
+import type { HookMetadata } from 'usehookify/registry'
 import { categoryStyle, getCategoryTheme } from '../../lib/categoryTheme'
 
 const CATEGORY_ORDER = ['storage', 'network', 'utility', 'state']

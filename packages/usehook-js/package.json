@@ -1,5 +1,5 @@
 {
-  "name": "usehook-js",
+  "name": "usehookify",
   "version": "1.0.0",
   "description": "A small, dependency-free React hooks library — install as a package or copy via CLI, same source either way.",
   "license": "MIT",
@@ -32,7 +32,7 @@
   },
   "files": ["dist", "src/hooks"],
   "bin": {
-    "usehook-js": "./dist/cli/bin.js"
+    "usehookify": "./dist/cli/bin.js"
   },
   "scripts": {
     "build": "tsup",

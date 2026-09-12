@@ -1,12 +1,16 @@
-# usehook-js
+# usehookify
 
 [![CI](https://github.com/vivekKumarSinghH/usehook-js/actions/workflows/ci.yml/badge.svg)](https://github.com/vivekKumarSinghH/usehook-js/actions/workflows/ci.yml)
-[![npm version](https://img.shields.io/npm/v/usehook-js.svg)](https://www.npmjs.com/package/usehook-js)
+[![npm version](https://img.shields.io/npm/v/usehookify.svg)](https://www.npmjs.com/package/usehookify)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A small, dependency-free React hooks library you can install as an npm
 package or copy directly into your project via a CLI — same maintained
 source either way.
+
+> Published as **`usehookify`** on npm (the repo is still `usehook-js` —
+> npm's registry flagged the original package name as too similar to an
+> existing popular package).
 
 ## Hooks
 
@@ -23,17 +27,17 @@ Full API reference, parameters, and usage examples for every hook are on the
 ## Install
 
 ```bash
-npm install usehook-js
+npm install usehookify
 ```
 
 ```ts
-import { useLocalStorage } from 'usehook-js'
+import { useLocalStorage } from 'usehookify'
 ```
 
 ## Or copy it directly — same source, no dependency
 
 ```bash
-npx usehook-js add useDebounce
+npx usehookify add useDebounce
 ```
 
 ```ts
@@ -48,7 +52,7 @@ never a stale fork of what's published to npm.
 See every hook currently available:
 
 ```bash
-npx usehook-js list
+npx usehookify list
 ```
 
 ```
@@ -58,7 +62,7 @@ useDebounce	useDebounce	utility	Return a debounced version of a rapidly-changing
 useToggle	useToggle	state	Manage a boolean value with a toggle function and an explicit setter.
 ```
 
-## Why usehook-js
+## Why usehookify
 
 - **Zero runtime dependencies** — only `react` as a peer dependency, checked by a CI import scanner on every build, not just claimed here.
 - **~850 B, brotli** — the entire library, checked against a 2 KB budget on every build.

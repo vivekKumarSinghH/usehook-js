@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <main>
       <section className="hero">
-        <h1>usehook-js</h1>
+        <h1>usehookify</h1>
         <p className="hero__lede">
           A small, dependency-free React hooks library. Install it as an npm package, or copy
           individual hooks straight into your project via the CLI — same maintained source
@@ -30,12 +30,12 @@ export default function HomePage() {
           <div className="step">
             <p className="step__number">1. Install or copy</p>
             <p className="step__label">Pick a hook, then get its source either way.</p>
-            <code className="step__code">npx usehook-js add useDebounce</code>
+            <code className="step__code">npx usehookify add useDebounce</code>
           </div>
           <div className="step">
             <p className="step__number">2. Import</p>
             <p className="step__label">Same import either way — same source underneath.</p>
-            <code className="step__code">{"import { useDebounce } from 'usehook-js'"}</code>
+            <code className="step__code">{"import { useDebounce } from 'usehookify'"}</code>
           </div>
           <div className="step">
             <p className="step__number">3. Use</p>
@@ -58,7 +58,7 @@ export default function HomePage() {
           <li className="trait">
             <span className="trait__label">two paths, one source</span>
             <p className="trait__desc">
-              <code>npm install</code> or <code>npx usehook-js add &lt;hook&gt;</code> — the CLI
+              <code>npm install</code> or <code>npx usehookify add &lt;hook&gt;</code> — the CLI
               copy is verified byte-identical to what&apos;s published.
             </p>
           </li>
@@ -87,7 +87,7 @@ export default function HomePage() {
       <section className="section">
         <h2>Open source</h2>
         <p>
-          usehook-js is developed in the open. Read the source, open an issue, or send a pull
+          usehookify is developed in the open. Read the source, open an issue, or send a pull
           request — the CONTRIBUTING guide covers the full workflow, including how to add a new
           hook. The package is pre-release and not yet published to npm.
         </p>

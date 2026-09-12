@@ -1,4 +1,4 @@
-# usehook-js
+# usehookify
 
 ## 1.0.0
 
@@ -13,7 +13,7 @@ First public release.
 
 ### Distribution
 
-- `npm install usehook-js` for the package, or `npx usehook-js add <hook>` to copy a hook's source directly into your project — both paths ship the exact same, byte-identical source.
+- `npm install usehookify` for the package, or `npx usehookify add <hook>` to copy a hook's source directly into your project — both paths ship the exact same, byte-identical source.
 - Zero runtime dependencies beyond `react` itself, enforced continuously in CI (source and built-bundle import scanning) rather than only claimed.
 - The built library entry point is ~850 B brotli-compressed, checked against a 2 KB CI budget.
 

@@ -16,7 +16,7 @@ const mono = Source_Code_Pro({
 })
 
 export const metadata = {
-  title: 'usehook-js',
+  title: 'usehookify',
   description:
     "A small, dependency-free React hooks library — install as a package or copy via CLI, same source either way.",
 }
@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <header className="site-header">
           <div className="site-header__inner">
             <a href="/" className="brand">
-              <span className="brand__mark">§</span> usehook-js
+              <span className="brand__mark">§</span> usehookify
             </a>
             <nav>
               <ul className="site-nav">
@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <footer className="site-footer">
           <div className="site-footer__inner">
             <p className="site-footer__tagline">
-              usehook-js — a small, dependency-free React hooks library.
+              usehookify — a small, dependency-free React hooks library.
             </p>
             <ul className="site-footer__links">
               <li>
